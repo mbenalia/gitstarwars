@@ -23,6 +23,23 @@ def create_dataframe_from_swapi(resource):
         return pd.DataFrame(data.get("results", []))
     else:
         return pd.DataFrame()
+def get_people(n):
+    people_data = get_swapi_data("people")
+    if people_data:
+        results = people_data.get("results", [])
+        liste = []
+        for i in range(min(n, len(results))):
+            liste.append(results[i])
+        return liste
+    else:
+        return []
+
+def create_dataframe_from_swapi(n):
+    data = get_people(n)
+    if data:
+        return pd.DataFrame(data)
+    else:
+        return pd.DataFrame()
 
 if __name__ == "__main__":
     people_df = create_dataframe_from_swapi("people")

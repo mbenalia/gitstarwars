@@ -10,6 +10,26 @@ def get_swapi_data(resource):
         print(f"Failed to retrieve data from {url}")
         return None
 
+def get_vehicles(n):
+    vehicles_data = get_swapi_data("vehicles")
+    if people_data:
+        results = vehicles_data.get("results", [])
+        liste = []
+        for i in range(min(n, len(results))):
+            liste.append(results[i])
+        return liste
+    else:
+        return []
+
+def create_dataframe_from_swapi_vehicles(n):
+    data = get_vehicles(n)
+    if data:
+        return pd.DataFrame(data)  # Passer directement la liste de dictionnaires
+    else:
+        return pd.DataFrame()
+
+
+
       
 def get_people(n):
     people_data = get_swapi_data("people")
@@ -22,7 +42,7 @@ def get_people(n):
     else:
         return []
 
-def create_dataframe_from_swapi(n):
+def create_dataframe_from_swapi_people(n):
     data = get_people(n)
     if data:
         return pd.DataFrame(data)
@@ -44,10 +64,9 @@ def create_dataframe_from_swapi_planets(n):
         return pd.DataFrame(data)  # Passer directement la liste de dictionnaires
     else:
         return pd.DataFrame()
-
-
+      
 if __name__ == "__main__":
-    people_df = create_dataframe_from_swapi("people")
-    print(people_df.head())
     planets_df = create_dataframe_from_swapi_planets(10)
     print(planets_df)
+    vehicles_df = create_dataframe_from_swapi_vehicles(10)
+    print(vehicles_df.head())

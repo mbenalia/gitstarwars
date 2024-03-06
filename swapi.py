@@ -25,7 +25,7 @@ def create_dataframe_from_swapi_starships(n):
     data = get_starships(n)
     if data:
         return pd.DataFrame(data)
-      
+
 def get_planets(n):
     planets_data = get_swapi_data("planets")
     if planets_data:
@@ -46,3 +46,4 @@ if __name__ == "__main__":
     print(starships_df.head())
     planets_df = create_dataframe_from_swapi_planets(10)
     print(planets_df)
+#commentaire branche alou

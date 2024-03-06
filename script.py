@@ -1,5 +1,4 @@
 import requests
-
 import pandas as pd
 
 def get_swapi_data(resource):
@@ -28,4 +27,3 @@ def create_dataframe_from_swapi(resource):
 if __name__ == "__main__":
     vehicles_df = create_dataframe_from_swapi("vehicles")
     print(vehicles_df.head())
-

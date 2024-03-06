@@ -10,21 +10,24 @@ def get_swapi_data(resource):
         print(f"Failed to retrieve data from {url}")
         return None
 
-def get_starships():
+def get_starships(n):
     starships_data = get_swapi_data("starships")
     if starships_data:
-        return starships_data.get("results", [])
+        results = starships_data.get("results", [])
+        liste = []
+        for i in range(min(n, len(results))):
+            liste.append(results[i])
+        return liste
     else:
         return []
 
-def create_dataframe_from_swapi(resource):
-    data = get_swapi_data(resource)
+def create_dataframe_from_swapi_starships(n):
+    data = get_starships(n)
     if data:
-        return pd.DataFrame(data.get("results", []))
+        return pd.DataFrame(data)
     else:
         return pd.DataFrame()
 
 if __name__ == "__main__":
-    starships_df = create_dataframe_from_swapi("starships")
+    starships_df = create_dataframe_from_swapi_starships(10)
     print(starships_df.head())
-
